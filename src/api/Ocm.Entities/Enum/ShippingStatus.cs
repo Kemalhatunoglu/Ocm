@@ -4,6 +4,7 @@
     {
         Sent,
         Cancelled,
-        Approval
+        Approval,
+        Waiting
     }
 }

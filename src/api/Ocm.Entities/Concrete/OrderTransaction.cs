@@ -9,9 +9,9 @@ namespace Ocm.Entities.Concrete
         public int Id { get; set; }
         public int CategoryId { get; set; }
         public int ShipmentId { get; set; }
-        public ShippingStatus Status { get; set; }
-        public bool IsApprovalRequired { get; set; }
-        public DateTime ShippingDate { get; set; }
-        public DateTime EstimatedDeliveryDate { get; set; }
+        public ShippingStatus Status { get; set; } = ShippingStatus.Waiting;
+        public bool IsApprovalRequired { get; set; } = false;
+        public DateTime ShippingDate { get; set; } = DateTime.Now;
+        public DateTime EstimatedDeliveryDate { get; set; } = DateTime.Now.AddDays(3);
     }
 }

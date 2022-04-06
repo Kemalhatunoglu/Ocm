@@ -22,17 +22,17 @@ namespace Ocm.Core.Extensions.Exceptions
             }
             catch (Exception e)
             {
-                await HandleExceptionAsync(httpContext);
+                await HandleExceptionAsync(httpContext, e);
             }
         }
 
-        private Task HandleExceptionAsync(HttpContext httpContext)
+        private Task HandleExceptionAsync(HttpContext httpContext, Exception e)
         {
             httpContext.Response.ContentType = "application/json";
             httpContext.Response.StatusCode = (int)HttpStatusCode.InternalServerError;
 
-            string message = "Internal Server Error";
-          
+            string message = e.Message;
+
             return httpContext.Response.WriteAsync(new ErrorDetails
             {
                 StatusCode = httpContext.Response.StatusCode,

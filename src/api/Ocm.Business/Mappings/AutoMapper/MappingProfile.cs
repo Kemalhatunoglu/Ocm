@@ -1,4 +1,6 @@
 ﻿using AutoMapper;
+using Ocm.Entities.Concrete;
+using Ocm.Entities.Dtos;
 
 namespace Ocm.Business.Mappings.AutoMapper
 {
@@ -6,7 +8,10 @@ namespace Ocm.Business.Mappings.AutoMapper
     {
         public MappingProfile()
         {
+            CreateMap<OrderTransaction, CreateOrderTransactionDto>().ReverseMap();
+            CreateMap<OrderTransaction, OrderTransactionDto>().ReverseMap();
 
+            CreateMap<Shipment, ShipmentResponseModel>().ReverseMap();
         }
     }
 }
