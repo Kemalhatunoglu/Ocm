@@ -1,5 +1,6 @@
 ﻿using Core.Utilities.Results;
 using Ocm.Entities.Concrete;
+using Ocm.Entities.Dtos;
 using System.Collections.Generic;
 
 namespace Ocm.Business.Abstract
@@ -7,6 +8,7 @@ namespace Ocm.Business.Abstract
     public interface IOrderTransactionService
     {
         IDataResult<List<OrderTransaction>> GetList();
-        IResult CreateTransaction(OrderTransaction orderTransaction);
+        IDataResult<OrderTransactionDto> CreateTransaction(CreateOrderTransactionDto createOrderTransactionDto);
+        IResult DeleteTransaction(int id);
     }
 }

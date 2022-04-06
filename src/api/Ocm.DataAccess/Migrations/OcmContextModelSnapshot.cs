@@ -40,7 +40,7 @@ namespace Ocm.DataAccess.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Customers");
+                    b.ToTable("Categories");
                 });
 
             modelBuilder.Entity("Ocm.Entities.Concrete.OrderTransaction", b =>
@@ -65,9 +65,12 @@ namespace Ocm.DataAccess.Migrations
                     b.Property<DateTime>("ShippingDate")
                         .HasColumnType("datetime2");
 
+                    b.Property<int>("Status")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
 
-                    b.ToTable("Products");
+                    b.ToTable("OrderTransactions");
                 });
 
             modelBuilder.Entity("Ocm.Entities.Concrete.Shipment", b =>
@@ -88,7 +91,7 @@ namespace Ocm.DataAccess.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Categories");
+                    b.ToTable("Shipments");
                 });
 #pragma warning restore 612, 618
         }
