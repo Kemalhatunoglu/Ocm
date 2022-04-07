@@ -1,8 +1,10 @@
 ﻿using Core.Utilities.Results;
 using Ocm.Business.Abstract;
 using Ocm.Business.Constants;
+using Ocm.Business.Mappings.AutoMapper;
 using Ocm.DataAccess.Abstract;
 using Ocm.Entities.Concrete;
+using Ocm.Entities.Dtos;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -22,9 +24,10 @@ namespace Ocm.Business.Concrete
         #endregion
 
         #region Methods
-        public IResult Add(Category category)
+        public IResult Add(CategoryDto categoryDto)
         {
-            _categoryDal.Add(category);
+            var createModel = ObjectMapper.Mapper.Map<CategoryDto, Category>(categoryDto);
+            _categoryDal.Add(createModel);
             return new SuccessResult(Messages.Success);
         }
 
@@ -33,10 +36,16 @@ namespace Ocm.Business.Concrete
             return new SuccessDataResult<List<Category>>(_categoryDal.GetList().ToList());
         }
 
-        public IResult Remove(Category category)
+        public IResult Remove(int id)
         {
-            _categoryDal.Delete(category);
-            return new SuccessResult(Messages.Success);
+            var dataToBeDeleted = _categoryDal.Get(x => x.Id == id);
+
+            if (dataToBeDeleted != null)
+            {
+                _categoryDal.Delete(dataToBeDeleted);
+                return new SuccessResult(Messages.Success);
+            }
+            return new ErrorResult(Messages.Error);
         }
 
         public IResult Update(Category category)
@@ -45,6 +54,5 @@ namespace Ocm.Business.Concrete
             return new SuccessResult(Messages.Success);
         }
         #endregion
-
     }
 }

@@ -41,7 +41,7 @@ namespace Ocm.WebAPI.Controllers
                 _distributedCache.SetString("list", result.Data.ToString(), new DistributedCacheEntryOptions
                 {
                     AbsoluteExpiration = DateTime.Now.AddSeconds(1200),
-                    SlidingExpiration = TimeSpan.FromSeconds(60)
+                    SlidingExpiration = TimeSpan.FromMinutes(10)
                 });
                 return Ok(result);
             }

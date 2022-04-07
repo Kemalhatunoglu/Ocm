@@ -11,7 +11,9 @@ namespace Ocm.Business.Mappings.AutoMapper
             CreateMap<OrderTransaction, CreateOrderTransactionDto>().ReverseMap();
             CreateMap<OrderTransaction, OrderTransactionDto>().ReverseMap();
 
-            CreateMap<Shipment, ShipmentResponseModel>().ReverseMap();
+            CreateMap<Shipment, ShipmentDto>().ReverseMap();
+
+            CreateMap<Category, CategoryDto>().ReverseMap();
         }
     }
 }
