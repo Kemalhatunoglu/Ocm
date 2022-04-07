@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Ocm.Business.Abstract;
+using Ocm.Entities.Dtos;
 
 namespace Ocm.WebAPI.Controllers
 {
@@ -19,11 +20,34 @@ namespace Ocm.WebAPI.Controllers
         #endregion
 
         #region Requests
-        //public IActionResult GetList()
-        //{
-        //    var response = _shipmentService.GetList();
-        //    return Ok(response);
-        //}
+        [HttpGet]
+        public IActionResult GetList()
+        {
+            var result = _shipmentService.GetList();
+            return Ok(result);
+        }
+
+        [HttpPost]
+        public IActionResult Add(ShipmentDto shipmentDto)
+        {
+            var result = _shipmentService.Add(shipmentDto);
+            if (result.Success)
+            {
+                return Ok(result);
+            }
+            return BadRequest(result);
+        }
+
+        [HttpDelete]
+        public IActionResult Delete(int id)
+        {
+            var result = _shipmentService.Remove(id);
+            if (result.Success)
+            {
+                return Ok(result);
+            }
+            return BadRequest(result);
+        }
         #endregion
     }
 }

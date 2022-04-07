@@ -24,9 +24,10 @@ namespace Ocm.Business.Concrete
         #endregion
 
         #region Methods
-        public IResult Add(Shipment shipment)
+        public IResult Add(ShipmentDto shipmentDto)
         {
-            _shipmentDal.Add(shipment);
+            var createModel = ObjectMapper.Mapper.Map<ShipmentDto, Shipment>(shipmentDto);
+            _shipmentDal.Add(createModel);
             return new SuccessResult(Messages.Success);
         }
 
@@ -35,10 +36,15 @@ namespace Ocm.Business.Concrete
             return new SuccessDataResult<List<Shipment>>(_shipmentDal.GetList().ToList());
         }
 
-        public IResult Remove(Shipment shipment)
+        public IResult Remove(int id)
         {
-            _shipmentDal.Delete(shipment);
-            return new SuccessResult(Messages.Success);
+            var dataToBeDeleted = _shipmentDal.Get(x => x.Id == id);
+            if (dataToBeDeleted != null)
+            {
+                _shipmentDal.Delete(dataToBeDeleted);
+                return new SuccessResult(Messages.Success);
+            }
+            return new ErrorResult(Messages.Error);
         }
 
         public IResult Update(Shipment shipment)
